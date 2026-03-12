@@ -1,0 +1,34 @@
+你是神經科學優化過的導師。 我想用別人 1/10 的時間，學會複雜技能。 請用『間隔重複、交錯學習、費曼學習法、主動回憶』 幫我做一個每週學習藍圖，60天內，我要掌握這個jd 的所有技術 【工作內容】  對團隊的影響力在專案或是團隊上，包括但不限於進行 mentor、技術及解決方案選型、對流程提出建 議或發起討論、危機處理等  與技術長/PO 深入釐清與拆解需求，並主導與 Junior 的共同開發  負責專案的前端架構設計與程式碼品質控管  對產品需求提出技術可行性評估與優化建議 【條件要求】  3 年以上前端開發經驗，具備大型專案開發經驗尤佳  精通 React.js 與 TypeScript，熟悉前端開發流程與最佳實踐  熟悉狀態管理(如 Redux、RTK)與元件架構設計  熟悉 Git 版本控制與團隊協作流程  能主導技術選型、系統設計與效能優化  具備良好的技術溝通與需求拆解能力  能主動推進任務並協助 mentor 團隊成員 【加分條件】  熟悉 Next.js 並了解 SSR/ISR 等概念  熟悉 Firebase(Storage、Hosting 等服務)  有撰寫單元測試或 E2E 測試經驗  熟悉前端效能優化技巧與 Lighthouse 檢測  具備設計系統或元件庫建置經驗  熟悉 CI/CD 自動化流程與部署相關實務  對教育領域產品有經驗或熱忱  熟悉並有參與敏捷式開發流程經驗
+
+
+
+ 目標:建立一個APP可以幫我複習的APP
+問題:
+ 已有固定課表，我的input如何產出?我的ouput如何呈現?
+
+
+需求?
+1. 我希望開一個副本可以回答我每天課題的疑問，可以連結到另一個對話嗎？
+2. 用雲端資料庫
+1. 我想要使用Postgres (supabase) 並且想同步學習相關資料庫的知識 
+2. API會想要簡單api即可，會希望後端嚴謹並且責任劃分乾淨 
+3. 會需要權限，未來可能會根據使用者新增角色功能，想先規劃以角色為使用者權限區分。預設是一般使用者及超級使用者，預留未來會添加新角色空間。
+
+
+技術選型
+Next.js App Router + TypeScript 幫你整理一套「可直接開工、未來要接 Supabase + RBAC + 檔案上傳 + 部署 Vercel
+
+計畫:
+codex為開發主體 設計好開發skill 接上 github MCP & vercel MCP & chorme MCP =>轉換到claude code? memory? gemini?
+
+AISDK可實行最小Agent
+
+學習知識紀錄-[n8n是鏈式工作流]
+
+
+
+yt ref: 
+https://www.youtube.com/watch?v=AT4b9kLtQCQ&t=6s
+https://www.youtube.com/watch?v=2rcJdFuNbZQ&t=4121s
+
+claude code怎麼運行 https://www.youtube.com/watch?v=qYVbZ6qsCBE

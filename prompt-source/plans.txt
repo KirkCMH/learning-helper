@@ -1,0 +1,271 @@
+下面是一份「60 天內把 JD 覆蓋到可上戰場」的每週學習藍圖。我會把 間隔重複（Spaced Repetition）、交錯學習（Interleaving）、費曼學習法（Feynman）、**主動回憶（Active Recall）**全部嵌進流程，並把成果設計成「能拿去面試與上工的產出」。
+
+假設你每週可投入：平日 2–3 小時 × 5 天 + 週末 4–6 小時 × 1 天（另一日休息/補進度）。若你能投入更多，只要加碼「實作與回憶測驗」，不要加碼被動閱讀。
+
+0) 核心策略（你用 1/10 時間的關鍵）
+A. 一週的固定節奏（每天都用同一套）
+
+每次學習都遵守這個「高密度迴圈」：
+
+主動回憶 10–15 分鐘（先考再學）
+
+不看資料，回答：今天主題的 5 個問題（我在每週都給你題庫模板）
+
+交錯實作 60–90 分鐘（兩種技能交錯）
+
+例如：React 架構 + RTK；Next SSR + 效能；測試 + 可維護性
+
+費曼輸出 15 分鐘（用白話講清楚）
+
+寫成 150–250 字筆記或錄 2 分鐘語音：「像在教 junior」
+
+間隔重複 10 分鐘（複習舊卡）
+
+用卡片（Anki/Obsidian）複習：D+1 / D+7 / D+21
+
+B. 交錯學習的「四軸」
+
+所有內容都用四軸交錯，避免「只會做題、不會上工」：
+
+架構與品質：元件設計、資料流、模組化、lint/test、PR 規範
+
+需求拆解與溝通：寫 Tech Spec、跟 PO/CTO 對齊、風險控管
+
+效能與交付：Lighthouse、bundle、SSR/ISR、CI/CD、部署
+
+團隊影響力：mentor、code review、技術選型與決策紀錄（ADR）
+
+1) 60 天主線專案（用一個作品把 JD 技術全部串起來）
+
+你會在 60 天內做出一個「教育產品型」的完整專案，因為 JD 提到教育領域加分：
+
+EduFlow（範例）
+
+Next.js（App Router）+ React + TypeScript
+
+狀態管理：Redux Toolkit（RTK）+ RTK Query
+
+UI：自建 Design System（Button/Input/Table/Modal）+ Storybook（可選）
+
+測試：Vitest/RTL + Playwright（E2E）
+
+Firebase：Hosting + Storage（上傳教材/圖片）
+
+效能：Lighthouse 指標改善、code splitting、圖片最佳化
+
+CI/CD：GitHub Actions（或 Azure DevOps）→ build/test/lint → deploy
+
+工程流程：Git flow、PR 模板、CODEOWNERS、commit convention
+
+文件：需求拆解、Tech Spec、ADR（技術選型紀錄）、runbook
+
+你不是在「學技術」，你是在「交付一個可以被 review 的系統」。
+
+2) 每週學習藍圖（8 週 + 4 天收斂）
+Week 1：基礎盤點 + TypeScript/React 進入「大型專案模式」
+
+目標：把你從「會寫」拉到「可維護、可擴展」
+產出：專案骨架 + 工程規範
+
+建專案：Next.js + TS + ESLint/Prettier + Husky + lint-staged
+
+TS 重點：泛型、型別縮小、utility types、API 型別建模、避免 any
+
+React 重點：render 模型、hooks 規則、組件切分、可測試性設計
+
+費曼輸出：寫一份《我們的前端專案規範 v1》：資料夾結構、命名、元件層級、錯誤處理
+
+主動回憶題（每天 5 題）：
+
+什麼情況用 union vs generic？
+
+React rerender 的三個常見來源？
+
+什麼是 “state colocation”？
+
+怎麼設計 props 才不會難測？
+
+大型專案的資料夾分層你怎麼定？
+
+Week 2：狀態管理與資料流（Redux Toolkit / RTK Query）
+
+目標：你能主導「狀態策略」並講清楚 trade-off
+產出：一套完整資料流（auth + domain entity）
+
+RTK：slice、createAsyncThunk、middleware、entity adapter
+
+RTK Query：cache、invalidations、optimistic update
+
+決策：哪些狀態放 global？哪些放 server cache？哪些放 component？
+
+費曼輸出：畫一張「狀態分類決策樹」給 junior 用
+
+交錯練習：同一功能做兩版（RTK Query vs local state），比較可維護性
+
+回憶題：
+
+RTK Query 如何避免重複請求？invalidate 的策略？
+
+entity adapter 解決什麼痛點？
+
+optimistic update 失敗要怎麼回滾？
+
+Week 3：元件架構設計 + Design System / 可重用性
+
+目標：你能「制定元件設計規範」並控制品質
+產出：至少 10 個可重用元件（含 Table/Modal/Form pattern）
+
+元件分層：Primitive → Compound → Feature → Page
+
+表單策略：react-hook-form + zod（或你熟的方案），錯誤訊息一致化
+
+可存取性（a11y）與一致行為（disabled/loading/empty）
+
+費曼輸出：《Component API 設計準則》：props 設計、事件命名、避免過度抽象
+
+交錯練習：每做 1 個元件，同步補 1 個測試（Week 5 會更深入）
+
+Week 4：Next.js SSR/ISR/SEO + 路由與資料取得策略
+
+目標：你能解釋 SSR/ISR/CSR 的差異並落地選型
+產出：至少 3 種頁面策略（SSR/ISR/CSR 各一）
+
+App Router：server component vs client component 邊界
+
+ISR：revalidate、cache、資料更新策略
+
+SEO：metadata、OG、結構化資料（基本即可）
+
+費曼輸出：寫一份《頁面渲染策略指南》：何時 SSR？何時 ISR？
+
+回憶題：
+
+SSR 的成本與風險？
+
+ISR 何時會踩到資料一致性問題？
+
+server/client component 的邊界怎麼定？
+
+Week 5：測試（單元/整合/E2E）+ Code Quality Gate
+
+目標：你能把「測試」變成團隊流程的一部分
+產出：CI 會跑的測試套件 + 規範
+
+Vitest + React Testing Library：render、user-event、mock server（MSW 可選）
+
+E2E：Playwright（登入、核心流程、檔案上傳）
+
+規範：coverage 不是唯一指標；以「風險路徑」為主
+
+費曼輸出：PR 模板 + 測試策略（哪些必測、哪些可不測）
+
+交錯練習：挑 Week 3 的元件回頭補測試（這就是間隔重複）
+
+Week 6：效能優化 + Lighthouse（可量化的改進）
+
+目標：你能用數據說話，提出可行優化方案
+產出：Lighthouse 報告 before/after + 改善清單
+
+Core Web Vitals：LCP/INP/CLS 的常見原因與對策
+
+bundle：dynamic import、拆包、tree-shaking 檢查
+
+圖片：next/image、尺寸策略、lazy load
+
+費曼輸出：做一份《效能優化 Checklist》+ 你的專案實例
+
+Week 7：Firebase（Hosting/Storage）+ 部署實務
+
+目標：你能完成「可用的上線鏈路」
+產出：線上環境（staging/prod）+ 檔案上傳流程
+
+Firebase Hosting：環境分離、cache headers（基本概念）
+
+Storage：上傳、權限規則（最小可用）
+
+交錯練習：把 E2E 跑在 staging（貼近真實交付）
+
+Week 8：CI/CD + Git 協作 + 敏捷流程 + 影響力（mentor/危機處理）
+
+目標：你能像資深工程師一樣推動團隊
+產出：完整工程流程包（你可以拿去面試展示）
+
+Git：branch strategy、PR review 節奏、rebase/merge 的政策
+
+CI/CD：lint/test/build/deploy、失敗回報、artifact、版本標記
+
+敏捷：拆 story、定義 DoD、風險與依賴管理
+
+mentor：寫一份《新人成長路線圖》+ 兩個 code review 範例（含建議語氣）
+
+費曼輸出：
+
+《技術選型流程》：需求→約束→方案→取捨→ADR
+
+《事故處理 Runbook》：回滾、hotfix、溝通節點
+
+Day 57–60：收斂與面試化（把學到的變成可說、可展示）
+
+目標：你能用「CTO/PO 聽得懂」的方式講系統與取捨
+產出（必做）：
+
+1 份 Tech Spec（需求拆解、範圍、風險、里程碑）
+
+3 份 ADR（例如：為何選 RTK Query、為何 SSR/ISR 這樣配）
+
+1 次 Lighthouse 改善報告（含數據）
+
+1 段 10 分鐘 Demo 講稿（含 Q&A）
+
+3) 間隔重複計畫（你每天只要 10 分鐘，但威力最大）
+
+你所有筆記都做成「問答卡」。複習節奏固定：
+
+D+1：隔天複習（快、短、以回憶為主）
+
+D+7：一週後複習（加入實作片段）
+
+D+21：三週後複習（加入「反例」與「踩雷」）
+
+卡片範例（你每週至少做 20 張）
+
+Q：什麼狀態適合放 RTK Query？什麼不適合？
+
+Q：SSR 的主要成本有哪些？如何緩解？
+
+Q：如何設計元件 API 讓它可測、可擴展？
+
+Q：LCP 通常被什麼拖慢？你會怎麼定位？
+
+Q：一次 production incident，你的處理順序？
+
+4) 每週自我測驗（主動回憶，確保你真的會）
+
+每週末做一次 45–60 分鐘「閉卷測驗」，題型固定：
+
+解釋題（費曼）：用 2 分鐘講清楚一個概念
+
+設計題：給需求，寫出架構與取捨
+
+除錯題：給一段容易踩雷的程式碼，指出風險與改善
+
+流程題：怎麼跟 PO/CTO 對齊？怎麼帶 junior？
+
+5) 你照這份藍圖走，60 天後你應該能達到的 JD 對應成果
+
+React/TS 精通：能制定規範、寫出可擴展結構
+
+狀態管理與元件架構：能做選型並說出 trade-off
+
+Git/協作流程：能建立 PR/branch/review 流程
+
+Next SSR/ISR：能以需求決策渲染策略
+
+Firebase/部署/CI/CD：能交付一條可用上線鏈路
+
+測試與品質控管：能把 quality gate 變成團隊習慣
+
+效能優化：能用 Lighthouse + 指標改善說服團隊
+
+需求拆解/影響力：能寫 spec/ADR、能 mentor、能處理危機
+
