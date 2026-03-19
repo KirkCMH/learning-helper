@@ -1,0 +1,19 @@
+import { requireAuthenticated } from "@/features/auth/application/auth.session";
+import { PlaceholderPage } from "@/features/learning/ui/PlaceholderPage";
+
+export default async function CoursesPage() {
+  await requireAuthenticated("/courses");
+
+  return (
+    <PlaceholderPage
+      title="Courses"
+      description="課程總覽、週次切換與 lesson 入口。"
+      currentPath="/courses"
+      highlights={[
+        { label: "Active course", value: "React x TypeScript" },
+        { label: "Current week", value: "Week 1" },
+        { label: "Lessons unlocked", value: "4" },
+      ]}
+    />
+  );
+}

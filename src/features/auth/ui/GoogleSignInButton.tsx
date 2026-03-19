@@ -1,14 +1,26 @@
 "use client";
 
-import { authBrowserService  } from "@/features/auth/application/auth.browser.service";
+import { authBrowserService } from "@/features/auth/application/auth.browser.service";
 
-export function GoogleSignInButton() {
+type GoogleSignInButtonProps = {
+  nextPath: string;
+};
+
+export function GoogleSignInButton({ nextPath }: GoogleSignInButtonProps) {
   const handleGoogleSignIn = async () => {
-    await authBrowserService .signInWithOAuth(
-      "google",
-      `${window.location.origin}/auth/callback`
-    );
+    const callbackUrl = new URL(`${window.location.origin}/auth/callback`);
+    callbackUrl.searchParams.set("next", nextPath);
+
+    await authBrowserService.signInWithOAuth("google", callbackUrl.toString());
   };
 
-  return <button onClick={handleGoogleSignIn}>Continue with Google</button>;
+  return (
+    <button
+      type="button"
+      onClick={handleGoogleSignIn}
+      className="rounded-lg border border-slate-300 px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+    >
+      Continue with Google
+    </button>
+  );
 }
