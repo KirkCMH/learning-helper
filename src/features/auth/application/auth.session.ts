@@ -1,4 +1,4 @@
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/features/auth/infrastructure/supabase/server.client";
@@ -16,6 +16,47 @@ export function normalizeNextPath(nextPath: string | null | undefined): string {
   }
 
   return nextPath;
+}
+
+function extractPathFromHeaderValue(value: string | null): string | null {
+  if (!value) {
+    return null;
+  }
+
+  if (value.startsWith("/")) {
+    return value;
+  }
+
+  try {
+    const parsedUrl = new URL(value);
+    return `${parsedUrl.pathname}${parsedUrl.search}`;
+  } catch {
+    return null;
+  }
+}
+
+export async function getCurrentRequestPath() {
+  const headerStore = await headers();
+  const headerCandidates = [
+    "x-pathname",
+    "x-next-pathname",
+    "next-url",
+    "x-url",
+    "x-invoke-path",
+    "x-matched-path",
+  ];
+
+  for (const headerName of headerCandidates) {
+    const path = extractPathFromHeaderValue(headerStore.get(headerName));
+
+    if (path) {
+      const query = headerName === "x-invoke-path" ? headerStore.get("x-invoke-query") : null;
+      return normalizeNextPath(query ? `${path}${query}` : path);
+    }
+  }
+
+  const refererPath = extractPathFromHeaderValue(headerStore.get("referer"));
+  return normalizeNextPath(refererPath);
 }
 
 export async function getAuthState() {

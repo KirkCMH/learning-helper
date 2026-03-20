@@ -1,9 +1,6 @@
-import { requireAuthenticated } from "@/features/auth/application/auth.session";
 import { PlaceholderPage } from "@/features/learning/ui/PlaceholderPage";
 
 export default async function WrongAnswersPage() {
-  await requireAuthenticated("/review/wrong-answers");
-
   return (
     <PlaceholderPage
       title="Wrong Answers Review"

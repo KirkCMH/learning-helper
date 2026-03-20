@@ -1,9 +1,6 @@
-import { requireAuthenticated } from "@/features/auth/application/auth.session";
 import { PlaceholderPage } from "@/features/learning/ui/PlaceholderPage";
 
 export default async function CoursesPage() {
-  await requireAuthenticated("/courses");
-
   return (
     <PlaceholderPage
       title="Courses"
