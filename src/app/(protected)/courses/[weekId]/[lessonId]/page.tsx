@@ -1,4 +1,5 @@
 import { PlaceholderPage } from "@/features/learning/ui/PlaceholderPage";
+import { buildCourseLessonRoute } from "@/lib/utils";
 
 type LessonPageProps = {
   params: Promise<{
@@ -14,7 +15,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
     <PlaceholderPage
       title="Lesson Detail"
       description="顯示指定週次與課程單元的內容、素材與練習入口。"
-      currentPath={`/courses/${weekId}/${lessonId}`}
+      currentPath={buildCourseLessonRoute(weekId, lessonId)}
       highlights={[
         { label: "Week", value: weekId },
         { label: "Lesson", value: lessonId },

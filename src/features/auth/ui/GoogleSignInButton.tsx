@@ -1,6 +1,7 @@
 "use client";
 
 import { authBrowserService } from "@/features/auth/application/auth.browser.service";
+import { AUTH_CALLBACK } from "@/lib/constants";
 
 type GoogleSignInButtonProps = {
   nextPath: string;
@@ -8,7 +9,7 @@ type GoogleSignInButtonProps = {
 
 export function GoogleSignInButton({ nextPath }: GoogleSignInButtonProps) {
   const handleGoogleSignIn = async () => {
-    const callbackUrl = new URL(`${window.location.origin}/auth/callback`);
+    const callbackUrl = new URL(`${window.location.origin}${AUTH_CALLBACK}`);
     callbackUrl.searchParams.set("next", nextPath);
 
     await authBrowserService.signInWithOAuth("google", callbackUrl.toString());

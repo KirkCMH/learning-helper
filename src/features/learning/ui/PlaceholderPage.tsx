@@ -1,6 +1,8 @@
 import Link from "next/link";
 
 import { ProtectedShell } from "@/features/learning/ui/ProtectedShell";
+import { DASHBOARD } from "@/lib/constants";
+import { buildCourseLessonRoute, buildQuizRoute } from "@/lib/utils";
 
 type PlaceholderPageProps = {
   title: string;
@@ -29,13 +31,13 @@ export function PlaceholderPage({
         <article className="rounded-2xl bg-white p-5 shadow-sm">
           <h2 className="text-lg font-semibold">Quick links</h2>
           <div className="mt-3 flex flex-col gap-2 text-sm">
-            <Link href="/dashboard" className="text-emerald-700 hover:underline">
+            <Link href={DASHBOARD} className="text-emerald-700 hover:underline">
               Go to dashboard
             </Link>
-            <Link href="/courses/week-1/lesson-1" className="text-emerald-700 hover:underline">
+            <Link href={buildCourseLessonRoute("week-1", "lesson-1")} className="text-emerald-700 hover:underline">
               Sample lesson detail
             </Link>
-            <Link href="/quiz/week-1/lesson-1" className="text-emerald-700 hover:underline">
+            <Link href={buildQuizRoute("week-1", "lesson-1")} className="text-emerald-700 hover:underline">
               Sample quiz session
             </Link>
           </div>

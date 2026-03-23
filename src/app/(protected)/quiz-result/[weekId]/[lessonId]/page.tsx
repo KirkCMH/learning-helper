@@ -1,4 +1,5 @@
 import { PlaceholderPage } from "@/features/learning/ui/PlaceholderPage";
+import { buildQuizResultRoute } from "@/lib/utils";
 
 type QuizResultPageProps = {
   params: Promise<{
@@ -14,7 +15,7 @@ export default async function QuizResultPage({ params }: QuizResultPageProps) {
     <PlaceholderPage
       title="Quiz Result"
       description="呈現該 lesson 測驗結果、正答率與建議複習重點。"
-      currentPath={`/quiz-result/${weekId}/${lessonId}`}
+      currentPath={buildQuizResultRoute(weekId, lessonId)}
       highlights={[
         { label: "Week", value: weekId },
         { label: "Lesson", value: lessonId },
