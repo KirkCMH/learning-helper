@@ -1,12 +1,10 @@
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { MOCK_AUTH_COOKIE, MOCK_AUTH_COOKIE_VALUE } from "@/features/auth/application/mock-auth.constants";
 
-export default function Home() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+export default async function Home() {
+  const cookieStore = await cookies();
+  const isAuthenticated = cookieStore.get(MOCK_AUTH_COOKIE)?.value === MOCK_AUTH_COOKIE_VALUE;
 
-        <h1>Learn OS</h1>
-        <p>Next.js App Router + Supabase skeleton is ready.</p>
-      </main>
-    </div>
-  );
+  redirect(isAuthenticated ? "/today" : "/login");
 }
