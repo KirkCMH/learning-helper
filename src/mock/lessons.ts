@@ -1,0 +1,48 @@
+import type { Lesson } from "@/types";
+
+export const mockLessons: Lesson[] = [
+  {
+    id: "week-01-lesson-01",
+    weekId: "week-01",
+    lessonId: "lesson-01",
+    courseId: "course-fullstack-foundations",
+    title: "認識 TypeScript 型別系統",
+    summary: "建立 primitive、array、union 與 interface 的基本觀念。",
+    durationMinutes: 45,
+    status: "completed",
+    learningGoals: ["了解常見型別", "能撰寫簡單 interface", "辨識型別推論"],
+  },
+  {
+    id: "week-01-lesson-02",
+    weekId: "week-01",
+    lessonId: "lesson-02",
+    courseId: "course-fullstack-foundations",
+    title: "使用 interface 建立可重用資料模型",
+    summary: "設計能被 mock data、API 與 UI 共用的型別。",
+    durationMinutes: 50,
+    status: "ready",
+    learningGoals: ["定義巢狀物件", "維持欄位一致性", "建立 id 關聯"],
+  },
+  {
+    id: "week-02-lesson-03",
+    weekId: "week-02",
+    lessonId: "lesson-03",
+    courseId: "course-fullstack-foundations",
+    title: "React 元件資料流",
+    summary: "透過 props 與 state 拆分可維護的畫面。",
+    durationMinutes: 55,
+    status: "locked",
+    learningGoals: ["理解單向資料流", "區分容器與展示元件", "降低耦合"],
+  },
+  {
+    id: "week-02-lesson-04",
+    weekId: "week-02",
+    lessonId: "lesson-04",
+    courseId: "course-fullstack-foundations",
+    title: "以情境驅動設計學習流程",
+    summary: "把 lesson、quiz、review 資料串接成完整學習體驗。",
+    durationMinutes: 60,
+    status: "locked",
+    learningGoals: ["建立跨資料關聯", "設計學習流程節點", "規劃複習狀態"],
+  },
+];
