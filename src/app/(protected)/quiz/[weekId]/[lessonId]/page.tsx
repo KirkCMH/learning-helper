@@ -1,4 +1,3 @@
-import { requireAuthenticated } from "@/features/auth/application/auth.session";
 import { PlaceholderPage } from "@/features/learning/ui/PlaceholderPage";
 
 type QuizPageProps = {
@@ -10,7 +9,6 @@ type QuizPageProps = {
 
 export default async function QuizPage({ params }: QuizPageProps) {
   const { weekId, lessonId } = await params;
-  await requireAuthenticated(`/quiz/${weekId}/${lessonId}`);
 
   return (
     <PlaceholderPage

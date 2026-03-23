@@ -1,4 +1,3 @@
-import { requireAuthenticated } from "@/features/auth/application/auth.session";
 import { inMemoryLearningRepository } from "@/features/learning/infrastructure/in-memory.learning.repository";
 import { ProtectedShell } from "@/features/learning/ui/ProtectedShell";
 
@@ -11,8 +10,6 @@ function isSameDay(date: Date, reference: Date): boolean {
 }
 
 export default async function DashboardPage() {
-  await requireAuthenticated("/dashboard");
-
   const snapshot = await inMemoryLearningRepository.getSnapshot();
   const today = new Date();
 
