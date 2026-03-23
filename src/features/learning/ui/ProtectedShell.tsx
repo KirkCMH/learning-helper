@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { PageHeader } from "@/components/layout/PageHeader";
+import { FeaturePageShell } from "@/components/layout";
 
 type ProtectedShellProps = {
   title: string;
@@ -10,9 +10,8 @@ type ProtectedShellProps = {
 
 export function ProtectedShell({ title, description, children }: ProtectedShellProps) {
   return (
-    <div className="flex min-w-0 flex-col gap-6">
-      <PageHeader title={title} description={description} />
-      <div>{children}</div>
-    </div>
+    <FeaturePageShell title={title} description={description}>
+      {children}
+    </FeaturePageShell>
   );
 }
