@@ -2,16 +2,17 @@ import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/features/auth/infrastructure/supabase/server.client";
+import { AUTH_CALLBACK, DASHBOARD, LOGIN, ROOT } from "@/lib/constants";
 
 const MOCK_SESSION_COOKIE = "learning-helper-mock-session";
-const DEFAULT_AUTHENTICATED_PATH = "/dashboard";
+const DEFAULT_AUTHENTICATED_PATH = DASHBOARD;
 
 export function normalizeNextPath(nextPath: string | null | undefined): string {
-  if (!nextPath || !nextPath.startsWith("/") || nextPath.startsWith("//")) {
+  if (!nextPath || !nextPath.startsWith(ROOT) || nextPath.startsWith("//")) {
     return DEFAULT_AUTHENTICATED_PATH;
   }
 
-  if (nextPath === "/" || nextPath.startsWith("/login") || nextPath.startsWith("/auth/")) {
+  if (nextPath === ROOT || nextPath.startsWith(LOGIN) || nextPath.startsWith(`${AUTH_CALLBACK}/`) || nextPath === AUTH_CALLBACK) {
     return DEFAULT_AUTHENTICATED_PATH;
   }
 
@@ -23,7 +24,7 @@ function extractPathFromHeaderValue(value: string | null): string | null {
     return null;
   }
 
-  if (value.startsWith("/")) {
+  if (value.startsWith(ROOT)) {
     return value;
   }
 
@@ -37,8 +38,13 @@ function extractPathFromHeaderValue(value: string | null): string | null {
 
 export async function getCurrentRequestPath() {
   const headerStore = await headers();
+  const pathname = headerStore.get("x-pathname");
+
+  if (pathname) {
+    return normalizeNextPath(`${pathname}${headerStore.get("x-search") ?? ""}`);
+  }
+
   const headerCandidates = [
-    "x-pathname",
     "x-next-pathname",
     "next-url",
     "x-url",
@@ -87,7 +93,7 @@ export async function requireAuthenticated(nextPath: string) {
   const authState = await getAuthState();
 
   if (!authState.isAuthenticated) {
-    redirect(`/login?next=${encodeURIComponent(normalizeNextPath(nextPath))}`);
+    redirect(`${LOGIN}?next=${encodeURIComponent(normalizeNextPath(nextPath))}`);
   }
 
   return authState;

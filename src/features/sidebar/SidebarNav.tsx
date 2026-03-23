@@ -4,9 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { SIDEBAR_NAV_ITEMS } from "@/features/sidebar/sidebar.constants";
+import { ROOT } from "@/lib/constants";
 
 function isActivePath(pathname: string, href: string) {
-  if (href === "/") {
+  if (href === ROOT) {
     return pathname === href;
   }
 

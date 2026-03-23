@@ -1,0 +1,11 @@
+export const ROOT = "/";
+export const LOGIN = "/login";
+export const AUTH_CALLBACK = "/auth/callback";
+export const DASHBOARD = "/dashboard";
+export const COURSES = "/courses";
+export const QUIZ_HISTORY = "/quiz-history";
+export const WRONG_ANSWERS = "/review/wrong-answers";
+export const PROFILE = "/profile";
+export const SETTINGS = "/settings";
+export const QUIZ = "/quiz";
+export const QUIZ_RESULT = "/quiz-result";

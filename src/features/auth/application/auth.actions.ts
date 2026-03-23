@@ -8,6 +8,7 @@ import {
   MOCK_SESSION_COOKIE,
   normalizeNextPath,
 } from "@/features/auth/application/auth.session";
+import { LOGIN, ROOT } from "@/lib/constants";
 
 export async function mockLoginAction(formData: FormData) {
   const email = String(formData.get("email") ?? "").trim();
@@ -15,7 +16,7 @@ export async function mockLoginAction(formData: FormData) {
   const nextPath = normalizeNextPath(String(formData.get("next") ?? DEFAULT_AUTHENTICATED_PATH));
 
   if (!email || !password) {
-    redirect(`/login?next=${encodeURIComponent(nextPath)}&error=missing-credentials`);
+    redirect(`${LOGIN}?next=${encodeURIComponent(nextPath)}&error=missing-credentials`);
   }
 
   const cookieStore = await cookies();
@@ -23,7 +24,7 @@ export async function mockLoginAction(formData: FormData) {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
-    path: "/",
+    path: ROOT,
     maxAge: 60 * 60 * 24 * 7,
   });
 
@@ -33,5 +34,5 @@ export async function mockLoginAction(formData: FormData) {
 export async function signOutAction() {
   const cookieStore = await cookies();
   cookieStore.delete(MOCK_SESSION_COOKIE);
-  redirect("/login");
+  redirect(LOGIN);
 }
