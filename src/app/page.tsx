@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
-import { DEFAULT_AUTHENTICATED_PATH, getAuthState } from "@/features/auth/application/auth.session";
-import { LOGIN } from "@/lib/constants";
+import { getAuthState } from "@/features/auth/application/auth.session";
+import { DEFAULT_AUTHENTICATED_PATH, LOGIN } from "@/lib/constants";
 
 export default async function Home() {
   const authState = await getAuthState();

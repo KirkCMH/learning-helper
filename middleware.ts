@@ -1,14 +1,41 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-import { AUTH_CALLBACK, LOGIN } from "@/lib/constants";
+import {
+  DEFAULT_AUTHENTICATED_PATH,
+  LOGIN,
+  MOCK_SESSION_COOKIE,
+  isProtectedRoute,
+  isPublicRoute,
+} from "@/lib/constants";
 
-const PUBLIC_PATHS = new Set([LOGIN, AUTH_CALLBACK]);
+function hasAuthenticatedSession(request: NextRequest) {
+  const hasMockSession = request.cookies.get(MOCK_SESSION_COOKIE)?.value === "authenticated";
+  const hasSupabaseSession = request.cookies
+    .getAll()
+    .some(({ name }) => name.startsWith("sb-") && name.includes("-auth-token"));
+
+  return hasMockSession || hasSupabaseSession;
+}
 
 export function middleware(request: NextRequest) {
   const requestHeaders = new Headers(request.headers);
-  requestHeaders.set("x-pathname", request.nextUrl.pathname);
-  requestHeaders.set("x-search", request.nextUrl.search);
+  const pathname = request.nextUrl.pathname;
+  const search = request.nextUrl.search;
+  const isAuthenticated = hasAuthenticatedSession(request);
+
+  requestHeaders.set("x-pathname", pathname);
+  requestHeaders.set("x-search", search);
+
+  if (pathname === LOGIN && isAuthenticated) {
+    return NextResponse.redirect(new URL(DEFAULT_AUTHENTICATED_PATH, request.url));
+  }
+
+  if (isProtectedRoute(pathname) && !isAuthenticated) {
+    const loginUrl = new URL(LOGIN, request.url);
+    loginUrl.searchParams.set("next", `${pathname}${search}`);
+    return NextResponse.redirect(loginUrl);
+  }
 
   const response = NextResponse.next({
     request: {
@@ -16,7 +43,7 @@ export function middleware(request: NextRequest) {
     },
   });
 
-  if (PUBLIC_PATHS.has(request.nextUrl.pathname)) {
+  if (isPublicRoute(pathname)) {
     response.headers.set("x-learning-helper-public-route", "true");
   }
 

@@ -3,12 +3,8 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-import {
-  DEFAULT_AUTHENTICATED_PATH,
-  MOCK_SESSION_COOKIE,
-  normalizeNextPath,
-} from "@/features/auth/application/auth.session";
-import { LOGIN, ROOT } from "@/lib/constants";
+import { normalizeNextPath } from "@/features/auth/application/auth.session";
+import { DEFAULT_AUTHENTICATED_PATH, LOGIN, MOCK_SESSION_COOKIE, ROOT } from "@/lib/constants";
 
 export async function mockLoginAction(formData: FormData) {
   const email = String(formData.get("email") ?? "").trim();

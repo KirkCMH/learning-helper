@@ -2,17 +2,14 @@ import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/features/auth/infrastructure/supabase/server.client";
-import { AUTH_CALLBACK, DASHBOARD, LOGIN, ROOT } from "@/lib/constants";
-
-const MOCK_SESSION_COOKIE = "learning-helper-mock-session";
-const DEFAULT_AUTHENTICATED_PATH = DASHBOARD;
+import { DEFAULT_AUTHENTICATED_PATH, LOGIN, MOCK_SESSION_COOKIE, ROOT, isPublicRoute } from "@/lib/constants";
 
 export function normalizeNextPath(nextPath: string | null | undefined): string {
   if (!nextPath || !nextPath.startsWith(ROOT) || nextPath.startsWith("//")) {
     return DEFAULT_AUTHENTICATED_PATH;
   }
 
-  if (nextPath === ROOT || nextPath.startsWith(LOGIN) || nextPath.startsWith(`${AUTH_CALLBACK}/`) || nextPath === AUTH_CALLBACK) {
+  if (nextPath === ROOT || isPublicRoute(nextPath)) {
     return DEFAULT_AUTHENTICATED_PATH;
   }
 
@@ -107,4 +104,3 @@ export async function redirectAuthenticated() {
   }
 }
 
-export { DEFAULT_AUTHENTICATED_PATH, MOCK_SESSION_COOKIE };
